@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Klaas Eikelboom  <klaas.eikelboom@civicoop.org>
+ * @date 27-Jan-2020
+ * @license  AGPL-3.0
+ */
+
 use CRM_IlgaIncomecategory_ExtensionUtil as E;
 
 /**

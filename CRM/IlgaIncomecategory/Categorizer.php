@@ -11,9 +11,9 @@ class CRM_IlgaIncomecategory_Categorizer
    var $unknownIncomeGroupId;
    var $year;
    var $map;
-
   /**
-   * CRM_IlgaIncomecategory_Categorizer constructor.
+   * CRM_IlgaIncomecategory_Categorizer constructor
+   *  at the moment it works for the table for the year 2020. In the future maybe income must be categorized by year.
    */
   public function __construct($year = '2020')
   {
@@ -33,13 +33,22 @@ class CRM_IlgaIncomecategory_Categorizer
       ]
     );
     $this->year=$year;
+    /* here the actual mapping is configured
+       the four categories of the worldbank
+       just map on one
+    */
     $this->map['Low income'] = $this->lowIncomeGroupId;
     $this->map['Upper middle income'] =  $this->lowIncomeGroupId;
     $this->map['High income']= $this->highIncomeGroupId;
     $this->map['Lower middle income'] =   $this->lowIncomeGroupId;
   }
 
-
+  /**
+   * Translates a civi country code to a income category. If no category is found
+   * return the code for unknown.
+   * @param $countryId
+   * @return integer
+   */
   public function map($countryId){
     $sql = <<< SQL
     select income_category from ilga_income_worldbank  iwb
@@ -59,13 +68,19 @@ SQL;
     }
   }
 
-
-  public function update($contactId,$updateGroupId){
+  /**
+   * Update a contact to a groupId, also the other group ids are removed.
+   * @param $contactId
+   * @param $updateGroupId
+   * @throws CiviCRM_API3_Exception
+   */
+  public function update($contactId, $updateGroupId){
       foreach([$this->lowIncomeGroupId,$this->highIncomeGroupId,$this->unknownIncomeGroupId] as $groupId){
         $gcId = CRM_Core_DAO::singleValueQuery('select id from civicrm_group_contact where contact_id=%1 and group_id=%2',[
           1 => [$contactId,'Integer'],
           2 => [$groupId,'Integer']
          ]);
+        // the following for ifs are mutually exclusive
         if($gcId && $groupId!=$updateGroupId){
           // found a record but not the update record so remove it
           CRM_Core_DAO::executeQuery('delete from civicrm_group_contact where id=%1',[
@@ -84,24 +99,25 @@ SQL;
       }
   }
 
+  /**
+   * Main workhose of extenson does al the work
+   * @throws CiviCRM_API3_Exception
+   */
   public function process(){
-    set_time_limit(0);
+    set_time_limit(0); // batch can take time so set time limit to unlimeted
     $sql = <<< SQL
+    -- select active addresses that belong to an organisation
     select contact_id, country_id
     from civicrm_address a
     join civicrm_contact c on (c.id = a.contact_id)
     where a.is_primary = 1
     and c.contact_type = 'Organization'
     and a.country_id is not null
-    and contact_id=6820
 SQL;
    $dao = CRM_Core_DAO::executeQuery($sql);
    while($dao->fetch()){
       $groupId = $this->map($dao->country_id);
       $this->update($dao->contact_id,$groupId);
-
    }
   }
-
-
 }
