@@ -8,7 +8,7 @@ create table ilga_income_worldbank
     country         varchar(50) not null,
     income_category varchar(25) not null
 ) collate = utf8_unicode_ci;
-create index ilga_income_worldbank_uk on ilga_income_worldbank (iso3,year);
+create unique index ilga_income_worldbank_uk on ilga_income_worldbank (iso3,year);
 
 INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (1, 'AFG', '2019', 'Afghanistan', 'Low income');
 INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (2, 'ALB', '2019', 'Albania', 'Upper middle income');
@@ -449,5 +449,4 @@ INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VAL
 INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (437, 'USA', '2020', 'United States', 'High income');
 INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (438, 'URY', '2020', 'Uruguay', 'High income');
 INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (439, 'VIR', '2020', 'Virgin Islands (U.S.)', 'High income');
-INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (440, 'TWN', '2020', 'Taiwan', 'High income');
-INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (441, 'JEY', '2020', 'Jersey', 'High income');
+INSERT INTO ilga_income_worldbank (id, iso3, year, country, income_category) VALUES (440, 'JEY', '2020', 'Jersey', 'High income');

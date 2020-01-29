@@ -253,7 +253,7 @@ INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('United States Mi
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('United States of America', 'US', 'USA');
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Uruguay', 'UY', 'URY');
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Uzbekistan', 'UZ', 'UZB');
-INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Vanuat', 'V', 'VUT');
+INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Vanuat', 'VU', 'VUT');
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Venezuela,Bolivarian Republic of', 'VE', 'VEN');
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Viet Nam', 'VN', 'VNM');
 INSERT INTO ilga_iso_translation (country, iso2, iso3) VALUES ('Virgin Islands,British', 'VG', 'VGB');
