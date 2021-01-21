@@ -15,7 +15,7 @@ class CRM_IlgaIncomecategory_Categorizer
    * CRM_IlgaIncomecategory_Categorizer constructor
    *  at the moment it works for the table for the year 2020. In the future maybe income must be categorized by year.
    */
-  public function __construct($year = '2020')
+  public function __construct($year = '2021')
   {
     $this->highIncomeGroupId = civicrm_api3('Group', 'getvalue', [
         'name' => 'high_income',
@@ -37,10 +37,11 @@ class CRM_IlgaIncomecategory_Categorizer
        the four categories of the worldbank
        just map on one
     */
-    $this->map['Low income'] = $this->lowIncomeGroupId;
-    $this->map['Upper middle income'] =  $this->lowIncomeGroupId;
-    $this->map['High income']= $this->highIncomeGroupId;
-    $this->map['Lower middle income'] =   $this->lowIncomeGroupId;
+    $this->map['LIC'] =  $this->lowIncomeGroupId;
+    $this->map['LMC'] =  $this->lowIncomeGroupId;
+    $this->map['HIC'] =  $this->highIncomeGroupId;
+    $this->map['LMY'] =  $this->lowIncomeGroupId;
+    $this->map['UMC'] =  $this->lowIncomeGroupId;
   }
 
   /**

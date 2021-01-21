@@ -22,12 +22,24 @@ class CRM_IlgaIncomecategory_Upgrader extends CRM_IlgaIncomecategory_Upgrader_Ba
     $this->executeSqlFile('sql/ilga_income_worldbank.sql');
     $this->executeSqlFile('sql/ilga_iso_translation.sql');
     $this->executeSqlFile('sql/upgrade_1001.sql');
+    $this->executeSqlFile('sql/upgrade_1002.sql');
+    $this->executeSqlFile('sql/upgrade_1003.sql');
   }
 
   function upgrade_1001(){
     $this->executeSqlFile('sql/ilga_income_worldbank.sql');
     $this->executeSqlFile('sql/ilga_iso_translation.sql');
     $this->executeSqlFile('sql/upgrade_1001.sql');
+    return TRUE;
+  }
+
+  function upgrade_1002(){
+    $this->executeSqlFile('sql/upgrade_1002.sql');
+    return TRUE;
+  }
+
+  function upgrade_1003(){
+    $this->executeSqlFile('sql/upgrade_1003.sql');
     return TRUE;
   }
 
